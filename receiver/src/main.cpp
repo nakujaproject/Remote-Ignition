@@ -1,7 +1,9 @@
 #include <Arduino.h>
+#include "radio.h"
+#include "relay.h"
 
 void setup() {
-  // put your setup code here, to run once:
+  setupRadio();
 }
 
 void loop() {
