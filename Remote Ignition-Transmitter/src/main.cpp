@@ -6,8 +6,10 @@
 
 #define CE_PIN 9
 #define CSN_PIN 10
+#define BUTTON 7
 
 const byte slaveAddress[5] = {'R', 'x', 'A', 'A', 'A'};
+bool value;
 
 RF24 radio(CE_PIN, CSN_PIN); // Create a Radio
 
@@ -20,60 +22,31 @@ unsigned long txIntervalMillis = 1000; // send once per second
 
 void setup()
 {
-
+    pinMode(BUTTON,INPUT);
     Serial.begin(9600);
 
     Serial.println("SimpleTx Starting");
 
     radio.begin();
+    radio.setCRCLength(RF24_CRC_16);
+    radio.setChannel(35);
+    radio.setPALevel(RF24_PA_MAX);
     radio.setDataRate(RF24_250KBPS);
     radio.setRetries(3, 5); // delay, count
     radio.openWritingPipe(slaveAddress);
-}
-
-//====================
-
-void updateMessage()
-{
-    // so you can see that new data is being sent
-    txNum += 1;
-    if (txNum > '9')
-    {
-        txNum = '0';
-    }
-    dataToSend[8] = txNum;
+    
 }
 
 
-void send()
-{
-
-    bool rslt;
-    rslt = radio.write(&dataToSend, sizeof(dataToSend));
-    // Always use sizeof() as it gives the size as the number of bytes.
-    // For example if dataToSend was an int sizeof() would correctly return 2
-
-    Serial.print("Data Sent ");
-    Serial.print(dataToSend);
-    if (rslt)
-    {
-        Serial.println("  Acknowledge received");
-        updateMessage();
-    }
-    else
-    {
-        Serial.println("  Tx failed");
-    }
-}
 
 void loop()
 {
-    currentMillis = millis();
-    if (currentMillis - prevMillis >= txIntervalMillis)
-    {
-        send();
-        prevMillis = millis();
-    }
+    value = digitalRead(BUTTON);
+    Serial.println(value);
+    radio.write( &value, sizeof(value) );
+    delay(10);
+
+
 }
 
 

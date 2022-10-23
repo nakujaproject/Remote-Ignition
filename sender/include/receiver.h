@@ -1,2 +1,0 @@
-void setupReceiver();
-int receiveData();
