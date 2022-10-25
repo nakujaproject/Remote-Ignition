@@ -2,6 +2,8 @@ from cmath import log
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 import serial
+from datetime import datetime
+import numpy as np
 
 import time
 
@@ -59,7 +61,7 @@ def action(action):
         while do_log:
             val = ser.readline().decode('utf-8').rstrip()
             allPoints.append(val)
-            time.sleep(0.01)
+            time.sleep(0.0125)
     if action == "off":
         do_log = False
         filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
