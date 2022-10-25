@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+   <head>
+      <title>GPIO Control</title>
+	  <link rel="stylesheet" href='../static/master.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	  <style>
+		  .button { 
+  border-radius: 50%; 
+  width: 200px;
+  height: 200px;
+  border: none;
+  color: white;
+  font-family: Avenir, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  background: red;
+  text-shadow: 0 3px 1px rgba(122,17,8,.8);
+  box-shadow: 0 8px 0 rgb(183,9,0), 
+    0 15px 20px rgba(0,0,0,.35);
+  text-transform: uppercase;
+  transition: .4s all ease-in;
+  outline: none; 
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+button span { position: relative; }
+/* fix for IE 11 (and IE8+, although the earlier versions are harder to address) stupidly moving the inner button text on click */
+.pressed { 
+  padding-top: 3px;
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 rgb(183,0,0),
+    0 8px 6px rgba(0,0,0,.45);
+}
+	  </style>
+   </head>
+
+   <body style="background-color: black;">
+		<h1 style="color: aliceblue;">Nakuja Test Stand</h1>
+		
+		<h2 style="color: aliceblue;"> Igniter Status </h2>
+		<h3 style="color: aliceblue;"> Ignition ==>  {{ ledRed  }}</h3>
+    <h4 style="color: aliceblue;"> Test Number {{ testNum }}</h4>
+		<br>
+		<h2 style="color: aliceblue;"> Commands </h2>
+		<h3 style="color: aliceblue;"> 
+			Fire ==> 
+			<a href="/ledRed/on" class="button"><button id="everybodydance"><span>ON</span></button></a>
+      <a href="/stopData/leds"><button class="btn btn-info"><span>STOP DATA LOGGING</span></button></a>
+		</h3>
+		
+   </body>
+</html>
