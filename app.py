@@ -5,8 +5,7 @@ import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
 from modules.dataFetcher import *
-import board
-import neopixel
+
 import serial
 
 import time
@@ -19,8 +18,7 @@ GPIO.setwarnings(False)
 #define actuators GPIOs Relay
 ledRed = 19
 
-#define neopixels
-pixels = neopixel.NeoPixel(board.D18, 8)
+
 
 #set up serial
 ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
@@ -46,7 +44,6 @@ def index():
 	# Read GPIO Status
 	ledRedSts = GPIO.input(ledRed)
 
-	pixels.fill((75,0,130))
 
 	templateData = {
       'ledRed'  : ledRedSts,
@@ -63,7 +60,7 @@ def action(deviceName, action):
    
 	if action == "on":
 		ser.flush()
-		t1 = Ignition(actuator, pixels)
+		t1 = Ignition(actuator)
 		ignitionThreads.append(t1)
 		ignitionThreads[testNum].start()
 		data = FetchData(ser)
@@ -74,7 +71,7 @@ def action(deviceName, action):
 
 	if deviceName == 'stopData':
 		dataThreads[testNum - 1].stop()
-		pixels.fill((75,0,130))
+		
 
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
