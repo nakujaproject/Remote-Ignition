@@ -26,15 +26,11 @@ GPIO.setup(ledRed, GPIO.OUT)
 
 GPIO.output(ledRed, GPIO.LOW)
 testNum = 0
-
-
+log = True
+allPoints =[]
 
 @app.route("/")
-def index():
-    global testNum
-    global log 
-    global allPoints
-    testNum = 0
+def index(): 
 	# Read GPIO Status
     ledRedSts = GPIO.input(ledRed)
     templateData = {
@@ -46,8 +42,6 @@ def index():
 # The function below is executed when someone requests a URL with the actuator name and action in it:
 @app.route("/<action>")
 def action(action):
-    allPoints=[]
-    log = True
     if action == "on":
         ser.flush()
         
@@ -67,7 +61,7 @@ def action(action):
 
     templateData = {
       'ledRed'  : ledRedSts,
-	  'testNum' : testNum,
+	  'testNum' : 1,
       }    
     
     return render_template('index.html', **templateData)
