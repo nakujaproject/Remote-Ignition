@@ -35,7 +35,7 @@ class FetchData(threading.Thread):
         while True:
             val = self._ser.readline().decode('utf-8').rstrip()
             allPoints.append(val)
-            time.sleep(0.0125)
+            time.sleep(0.01)
             if self.stopped():
                 filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
                 np.savetxt(filename, allPoints, newline="\n", fmt='%s')
