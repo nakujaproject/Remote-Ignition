@@ -55,17 +55,21 @@ def action(action):
         ser.flush()
         
         GPIO.output(ledRed,GPIO.HIGH)
-        time.sleep(5)
+        print("Igniting")
+        time.sleep(1)
         GPIO.output(ledRed,GPIO.LOW)
+        print("Not igniting")
         
         while do_log:
             val = ser.readline().decode('utf-8').rstrip()
             allPoints.append(val)
             time.sleep(0.0125)
+            
     if action == "off":
         do_log = False
         filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
         np.savetxt(filename, allPoints, newline="\n", fmt='%s')
+        print("Done logging")
         testNum=+1
 
     templateData = {
