@@ -26,7 +26,7 @@ GPIO.setup(ledRed, GPIO.OUT)
 
 GPIO.output(ledRed, GPIO.LOW)
 testNum = 0
-log = True
+do_log = True
 allPoints =[]
 
 @app.route("/")
@@ -49,12 +49,12 @@ def action(action):
         time.sleep(5)
         GPIO.output(ledRed,GPIO.LOW)
         
-        while log:
+        while do_log:
             val = ser.readline().decode('utf-8').rstrip()
             allPoints.append(val)
             time.sleep(0.01)
     if action == "off":
-        log = False
+        do_log = False
         filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
         np.savetxt(filename, allPoints, newline="\n", fmt='%s')
         testNum=+1
