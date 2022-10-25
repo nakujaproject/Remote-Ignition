@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 import numpy as np
 import random
 from datetime import datetime
-from modules.drive import uploadToDrive
+#from modules.drive import uploadToDrive
   
 class FetchData(threading.Thread):
   
