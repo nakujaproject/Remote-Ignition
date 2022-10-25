@@ -62,8 +62,14 @@ def action(action):
         log = False
         filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
         np.savetxt(filename, allPoints, newline="\n", fmt='%s')
-        return
-  
+        testNum=+1
+
+    templateData = {
+      'ledRed'  : ledRedSts,
+	  'testNum' : testNum,
+      }    
+    
+    return render_template('index.html', **templateData)
 
 
 
