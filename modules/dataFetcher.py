@@ -39,7 +39,7 @@ class FetchData(threading.Thread):
             if self.stopped():
                 filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
                 np.savetxt(filename, allPoints, newline="\n", fmt='%s')
-                uploadToDrive(filename)
+                #uploadToDrive(filename)
                 return
   
 
