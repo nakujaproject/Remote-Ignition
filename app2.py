@@ -34,6 +34,7 @@ def index():
     global testNum
     global log 
     global allPoints
+    testNum = 0
 	# Read GPIO Status
     ledRedSts = GPIO.input(ledRed)
     templateData = {
