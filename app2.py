@@ -21,16 +21,19 @@ ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 ser.flush()
 
 ledRedSts = 0
+testNum = 0
+allPoints =[]
+do_log = True
 
 GPIO.setup(ledRed, GPIO.OUT)   
 
 GPIO.output(ledRed, GPIO.LOW)
-testNum = 0
-do_log = True
-allPoints =[]
+
 
 @app.route("/")
 def index(): 
+    global testNum
+
 	# Read GPIO Status
     ledRedSts = GPIO.input(ledRed)
     templateData = {
@@ -42,6 +45,10 @@ def index():
 # The function below is executed when someone requests a URL with the actuator name and action in it:
 @app.route("/<action>")
 def action(action):
+    global testNum
+    global do_log
+    global allPoints
+
     if action == "on":
         ser.flush()
         
