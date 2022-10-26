@@ -1,12 +1,12 @@
 from flask import Flask, request, send_from_directory
+import requests
 from flask_cors import CORS
 import os
 from log import secretary
-from rwCOM import COM
 
 app = Flask(__name__, static_folder='frontend/dist')
 CORS(app)
-omega = ''
+latest = ''
 
 # Serve React App
 @app.route('/', defaults={'path': ''})
@@ -24,9 +24,9 @@ def test():
 @app.route('/gateway') #Data from esp32, embedded in URL
 def gateway():
     data = request.args
-    omega = data.get('timestamp')
-    secretary(omega)
+    latest = data.get('data')
+    secretary(latest)
 
 @app.route('/fetch') #respond to web app request of data
 def fetch():
-    return {'data': omega}
+    return {'data': latest}
