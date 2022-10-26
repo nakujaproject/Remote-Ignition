@@ -2,6 +2,7 @@ from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 import os
 from log import secretary
+from rwCOM import COM
 
 app = Flask(__name__, static_folder='frontend/dist')
 CORS(app)

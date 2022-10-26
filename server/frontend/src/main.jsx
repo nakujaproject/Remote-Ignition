@@ -5,6 +5,7 @@ import './index.css'
 import Speed from './components/speed'
 import Ignite from './components/ignite'
 import Stream from './components/stream'
+import Checklist from './components/checklist'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
