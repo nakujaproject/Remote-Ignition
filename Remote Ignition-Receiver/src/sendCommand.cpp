@@ -1,9 +1,14 @@
+// receives command via http then relays via nrf
 #include <Arduino.h>
 
-String getCommand(){//get input from serial monitor for testing
+#include "global.h"
+
+String getCommand(){
   String command;
-  while (Serial.available() != 0)
+  if(DEBUG){//Get command from serial monitor if debugging
+    while (Serial.available() != 0)
     command = Serial.readStringUntil('\n');
-  Serial.println("Command is: "+command);
+    debugln("Command is: "+command);
+  }else{}
   return command.c_str();
 }

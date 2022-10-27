@@ -24,8 +24,9 @@ def test():
 @app.route('/gateway') #Data from esp32, embedded in URL
 def gateway():
     data = request.args
-    latest = data.get('data')
-    secretary(latest)
+    latest = data.get('payload')+'\n'
+    secretary(bytes(latest,'utf-8'))
+    return {'null':'null'}
 
 @app.route('/fetch') #respond to web app request of data
 def fetch():
