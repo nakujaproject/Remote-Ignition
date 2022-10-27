@@ -19,7 +19,10 @@ void setupRadio(){
     //Set module as receiver
     radio.startListening();
 }
-void tx(){}
+void tx(String message){
+    radio.stopListening();
+    radio.write(message.c_str(), message.length());
+}
 void rx(){
     //Read the data if available in buffer
     if (radio.available()){

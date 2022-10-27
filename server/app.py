@@ -7,6 +7,7 @@ from log import secretary
 app = Flask(__name__, static_folder='frontend/dist')
 CORS(app)
 latest = ''
+url = 'http://192.168.100.95/' #IP for ESP32
 
 # Serve React App
 @app.route('/', defaults={'path': ''})
@@ -26,6 +27,13 @@ def gateway():
     data = request.args
     latest = data.get('payload')+'\n'
     secretary(bytes(latest,'utf-8'))
+    return {'null':'null'}
+
+@app.route("/command") # Send command to esp32
+def command():
+    headers = {'Command':request.args.get('command')}
+    r = requests.get(url,headers=headers)
+    print(r.text)
     return {'null':'null'}
 
 @app.route('/fetch') #respond to web app request of data

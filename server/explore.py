@@ -26,8 +26,8 @@ with open('logs.csv') as logs:
         count+=1
         omega = int(row[0])
     
-    print('First entry:',firstEntry)
+    print('First entry:',firstEntry,'&& Last entry:',omega)
     print('Number of entries:',count)
     print('Lost entries:',omega-count)
     for v,i in enumerate(missingInRange):
-        print(f"Bettween entry {v*constantStep}-{v*constantStep+constantStep} :: {i}")
+        print(f"Bettween entry {v*constantStep}-{v*constantStep+constantStep} :: {i} == {round(i/constantStep*100,2)}%")
