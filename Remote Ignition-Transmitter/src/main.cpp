@@ -1,13 +1,24 @@
 #include <Arduino.h>
 #include <SPI.h>
-#include "nRF24L01.h"
-#include "RF24.h"
+#include <nRF24L01.h>
+#include <RF24.h>
 
-#define CE_PIN 9
-#define CSN_PIN 10
+#include "hx7.h"
+#include "radio.h"
 
-void setup(){
+void setup()
+{
+  Serial.begin(9600);
+  setupHX711();
+  setupRadio();
+  
 }
+int count = 0;
 
-void loop(){
+void loop()
+{
+  count++;
+  //Send message to receiver
+  String payload = String(count)+","+String(getMass());
+  tx(payload);
 }
