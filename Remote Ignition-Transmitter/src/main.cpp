@@ -63,9 +63,9 @@ void loop()
       Serial.println(i);
     }
       
-    digitalWrite(7,HIGH);//turn relay on
+    digitalWrite(relay_pin,HIGH);//turn relay on
     delay(5000);
-    digitalWrite(7,LOW);
+    digitalWrite(relay_pin,LOW);
     STATE=IGNITED;
   }
 

@@ -40,7 +40,6 @@ void setup(){
 
 void loop(){
     if(STATE==PRE_IGNITION){
-        // Serial.println("STATE :: [PRE_IGNITION]");
         String command;
         while (Serial.available() != 0)
             command = Serial.readStringUntil('\n');
@@ -51,14 +50,12 @@ void loop(){
     }
 
     if(STATE==COUNTDOWN){
-        // Serial.println("STATE :: [COUNTDOWN]");
         radio.openReadingPipe(0, address);
         radio.startListening();//change nrf to receiving mode
         STATE=IGNITED;
     }
 
     if(STATE==IGNITED){
-        // Serial.println("STATE :: [IGNITED]");
         //Read the data if available in buffer
         if (radio.available()){
             char text[32] = {0};
