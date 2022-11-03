@@ -1,21 +1,69 @@
-/**
- *      Data Format - max 32bytes=32 char
- * uint32,float(1)...,float(n)
- * index, hx711_value\n
- */
 #include <Arduino.h>
 #include <SPI.h>
-#include "nRF24L01.h"
-#include "RF24.h"
+#include <nRF24L01.h>
+#include <RF24.h>
 
-#include "sendCommand.h"
+#define EEPROM_SIZE 1
 
-#define CE_PIN   9
-#define CSN_PIN 10
-#define LED 7
+int PRE_IGNITION = 0;
+int COUNTDOWN = 1;
+int IGNITED = 2;
+int STATE;
 
-void setup() {
+//create an RF24 object
+RF24 radio(9, 8);  // CE, CSN
+
+//address through which two modules communicate.
+const byte address[6] = "00001";
+
+void setup(){
+    Serial.begin(9600);
+    
+    radio.begin();
+
+    //#############################
+    radio.openReadingPipe(0, address);
+    radio.startListening();
+    delay(1500); 
+    if(radio.available()){
+        STATE = COUNTDOWN;
+    }else{
+        STATE = PRE_IGNITION;
+    }
+    radio.closeReadingPipe(0);
+    //#############################
+
+    //Set module as transmitter before ignition
+    radio.openWritingPipe(address);
+    radio.stopListening();
 }
 
-void loop() {
+void loop(){
+    if(STATE==PRE_IGNITION){
+        // Serial.println("STATE :: [PRE_IGNITION]");
+        String command;
+        while (Serial.available() != 0)
+            command = Serial.readStringUntil('\n');
+        Serial.println("Command is: "+command);
+        radio.write(command.c_str(), command.length());
+        if (command=="ignite")
+            STATE=COUNTDOWN;
+    }
+
+    if(STATE==COUNTDOWN){
+        // Serial.println("STATE :: [COUNTDOWN]");
+        radio.openReadingPipe(0, address);
+        radio.startListening();//change nrf to receiving mode
+        STATE=IGNITED;
+    }
+
+    if(STATE==IGNITED){
+        // Serial.println("STATE :: [IGNITED]");
+        //Read the data if available in buffer
+        if (radio.available()){
+            char text[32] = {0};
+            radio.read(&text, sizeof(text));
+            Serial.println(text);
+        }
+    }
 }

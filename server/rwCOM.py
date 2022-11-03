@@ -22,5 +22,5 @@ class COM(object):
                 print(COM.latest.decode('Ascii'),end='')
 
 if __name__=="__main__":
-    serialCOM = COM('COM6')
+    serialCOM = COM('COM7')
     serialCOM.main()
