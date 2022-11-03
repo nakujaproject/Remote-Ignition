@@ -22,5 +22,6 @@ void setupRadio(){
 }
 
 void tx(String payload){
+    debug(".");
     radio.write(payload.c_str(), payload.length());
 }

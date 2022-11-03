@@ -5,10 +5,10 @@
 
 #include "global.h"
 
-#define server_addr "192.168.100.12"
+#define server_addr "192.168.43.74"
 
-const char* ssid     = "FABIAN";
-const char* password = "Gisore@123";
+const char* ssid     = "sam";
+const char* password = "samson2002";
 
 void wifiSetup(){
     debugln();

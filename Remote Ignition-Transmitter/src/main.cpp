@@ -5,6 +5,7 @@
 
 #include "hx7.h"
 #include "radio.h"
+#include "global.h"
 
 void setup()
 {
@@ -20,5 +21,6 @@ void loop()
   count++;
   //Send message to receiver
   String payload = String(count)+","+String(getMass());
+  debugln(payload);
   tx(payload);
 }

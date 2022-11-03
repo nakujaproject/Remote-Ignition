@@ -12,6 +12,6 @@
 
 //Pins
 #define CE_PIN 9
-#define CSN_PIN 10
+#define CSN_PIN 8
 const int DT_PIN = 2;
 const int SCK_PIN = 3;
