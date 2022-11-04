@@ -1,9 +1,5 @@
-from cmath import log
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
-import serial
-from datetime import datetime
-import numpy as np
 
 import time
 
