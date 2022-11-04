@@ -10,6 +10,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 ledRed = 26
+ledRedSts = 0
+testNum = 0
 
 GPIO.setup(ledRed, GPIO.OUT)   
 
