@@ -37,7 +37,8 @@ def action(action):
     if action == "on":
         GPIO.output(ledRed,GPIO.HIGH)
         print("Igniting")
-        time.sleep(1)
+        time.sleep(5)
+        testNum =testNum+1
         GPIO.output(ledRed,GPIO.LOW)
         print("Not igniting")
             
