@@ -21,7 +21,7 @@ ledRed = 19
 
 
 #set up serial
-ser = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 ser.flush()
 
 #initialize GPIO status variables
