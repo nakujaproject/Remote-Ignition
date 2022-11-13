@@ -1,12 +1,11 @@
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 import os
-from log import secretary
-from rwCOM import COM
+import random
 
 app = Flask(__name__, static_folder='frontend/dist')
 CORS(app)
-omega = ''
+omega: str = ''
 
 # Serve React App
 @app.route('/', defaults={'path': ''})
@@ -21,12 +20,7 @@ def serve(path):
 def test():
     return {"test":"Server says hello"}
 
-@app.route('/gateway') #Data from esp32, embedded in URL
-def gateway():
-    data = request.args
-    omega = data.get('timestamp')
-    secretary(omega)
 
 @app.route('/fetch') #respond to web app request of data
 def fetch():
-    return {'data': omega}
+    return {'data': random.randint(1,500)}

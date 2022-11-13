@@ -10,6 +10,5 @@ import Checklist from './components/checklist'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-    <Speed/>
   </React.StrictMode>
 )
